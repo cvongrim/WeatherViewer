@@ -5,6 +5,8 @@
           android:versionName="1.0">
 
     <uses-sdk android:minSdkVersion="18"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
             android:label="@string/app_name"
             android:icon="@drawable/ic_launcher">
@@ -16,5 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <receiver android:name=".WeatherProvider">
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/weather_widget_provider_info" />
+            <intent-filter>
+                <action android:name="android.appwidget,action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.colinv.WeatherViewer.UPDATE_WIDGET" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".WeatherProvider$WeatherService"/>
+
     </application>
 </manifest>
